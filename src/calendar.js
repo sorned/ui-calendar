@@ -353,10 +353,10 @@ angular.module('ui.calendar', [])
                     scope.$watch(getOptions, function (newValue, oldValue) {
                         if (newValue !== oldValue) {
                             scope.destroyCalendar();
-                            $timeout(function(){scope.init()}); // Be sure to include $timeout
+                            $timeout(function(){scope.initCalendar()}); // Be sure to include $timeout
 
                         } else if ((newValue && angular.isUndefined(calendar))) {
-                            $timeout(function(){scope.init()}); // Be sure to include $timeout
+                            $timeout(function(){scope.initCalendar()}); // Be sure to include $timeout
                         }
                     });
                 }
