@@ -229,8 +229,8 @@ angular.module('ui.calendar', [])
             };
         }
     ])
-    .directive('uiCalendar', ['uiCalendarConfig',
-        function (uiCalendarConfig) {
+    .directive('uiCalendar', ['uiCalendarConfig', '$timeout',
+        function (uiCalendarConfig, $timeout) {
 
             return {
                 restrict : 'A',
@@ -353,9 +353,10 @@ angular.module('ui.calendar', [])
                     scope.$watch(getOptions, function (newValue, oldValue) {
                         if (newValue !== oldValue) {
                             scope.destroyCalendar();
-                            scope.initCalendar();
+                            $timeout(function(){scope.init()}); // Be sure to include $timeout
+
                         } else if ((newValue && angular.isUndefined(calendar))) {
-                            scope.initCalendar();
+                            $timeout(function(){scope.init()}); // Be sure to include $timeout
                         }
                     });
                 }
